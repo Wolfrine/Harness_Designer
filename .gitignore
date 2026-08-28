@@ -1,0 +1,17 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.*
+secrets/
+.harness/private/
+
+# Common local/editor noise
+.DS_Store
+Thumbs.db
+.vscode/*.local.json
+.idea/

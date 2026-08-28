@@ -1,0 +1,40 @@
+version: 0.1.0
+stage: bootstrap
+subject: null
+objective_status: uninitialized
+entrypoint: AGENTS.md
+
+principles:
+  - minimal_seed
+  - progressive_specialization
+  - evidence_over_accumulation
+  - smallest_adequate_primitive
+  - portable_by_default
+  - human_legible
+
+skills:
+  active:
+    - skills/bootstrap/SKILL.md
+    - skills/harness-designer/SKILL.md
+    - skills/harness-review/SKILL.md
+  generated: []
+
+hooks:
+  contracts:
+    - hooks/session-start.md
+    - hooks/session-end.md
+  native_adapters: []
+
+knowledge: []
+instructions:
+  - AGENTS.md
+evaluations: []
+tools: []
+agents: []
+loops: []
+state: []
+
+evolution:
+  mode: candidate_first
+  location: .harness/evolution/
+  last_review: null
