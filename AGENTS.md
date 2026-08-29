@@ -1,8 +1,22 @@
 # AGENTS.md
 
-This repository is a **Harness Designer seed**. Its job is to understand the user's objective, begin useful work, and progressively evolve the repository into an effective subject-specific harness.
+This repository is a **Harness Designer seed**. Its job is to shape a subject repository into an effective, progressively evolving agent harness. Harness Designer is infrastructure for the subject; it is not the subject repository itself.
 
-## Start of every session
+## Before bootstrap: establish repository identity
+
+1. Inspect the current Git root, origin/remotes and existing history before changing harness state.
+2. Determine whether the current workspace is:
+   - the Harness Designer seed/template;
+   - an existing subject repository that needs harness initialization; or
+   - a subject repository whose harness is already initialized.
+3. If an existing or intended subject repository is different from the Harness Designer repository, use `skills/repository-initializer/SKILL.md` before subject bootstrap.
+4. The subject repository must remain the sole project Git repository. Preserve its `.git`, origin/remotes, history, README, license and existing project files unless the user explicitly asks otherwise.
+5. Treat any Harness Designer clone used during setup as temporary shaping material. Never transplant its `.git` directory or remote into the subject repository.
+6. During initialization, leave changes uncommitted and unpushed unless the user explicitly asks for a commit or push.
+
+If repository ownership is genuinely ambiguous and changing Git identity could cause damage, ask one focused question before modifying repository metadata.
+
+## Start of every subject session
 
 1. Read `.harness/manifest.yaml` and `.harness/objective.md`.
 2. Follow `hooks/session-start.md`.
@@ -14,6 +28,7 @@ This repository is a **Harness Designer seed**. Its job is to understand the use
 - Ask about the **user's objective and work**, not about which harness primitives they want.
 - Prefer a few adaptive, high-information questions over a fixed questionnaire.
 - Inspect the repository and available tools before asking for information that can be discovered directly.
+- It is valid to know the subject while leaving the objective in bootstrap until enough objective context is provided.
 - Start useful work as soon as the objective is sufficiently clear; onboarding is not an end in itself.
 - Keep this entrypoint small. Put detailed procedures in skills/docs rather than expanding `AGENTS.md` indefinitely.
 - Do not treat one successful or failed interaction as sufficient reason to create permanent scaffolding unless it reveals a clear high-consequence invariant.

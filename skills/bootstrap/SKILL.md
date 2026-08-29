@@ -1,15 +1,19 @@
 ---
 name: bootstrap
-description: Initialize a fresh Harness Designer clone by discovering the user's objective, current situation, important factors and immediate working needs, then creating only the minimum harness required to begin useful work.
+description: Discover the subject objective, current situation, important factors and immediate working needs after repository identity is safely established, then create only the minimum harness required to begin useful work.
 ---
 
 # Bootstrap
 
 Use this skill when `.harness/manifest.yaml` says `stage: bootstrap` or when the objective is materially undefined.
 
+Repository identity must already be established. If the subject repository is not yet clearly the sole project repository, use `skills/repository-initializer/SKILL.md` first.
+
 ## Goal
 
 Understand enough of the subject to start productive work without requiring the user to understand harness engineering first.
+
+It is valid to know the subject name while leaving the objective in bootstrap until the user provides enough context.
 
 ## Procedure
 
@@ -43,9 +47,12 @@ Update `.harness/objective.md` with what is actually known. Distinguish known co
 
 Update `.harness/manifest.yaml`:
 
-- set a concise `subject`;
+- set a concise `subject` when known;
+- keep `objective_status` in bootstrap/uninitialized while material objective context is still missing;
 - set `objective_status` to `working` when enough is known to proceed;
-- change `stage` from `bootstrap` to `active` once the first useful harness exists.
+- change `stage` from `bootstrap` to `active` once the first useful subject-specific harness exists.
+
+Do not invent objective details merely to complete initialization.
 
 Create additional subject/context documents only when they already provide practical value.
 

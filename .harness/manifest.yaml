@@ -1,10 +1,11 @@
-version: 0.1.0
+version: 0.2.0
 stage: bootstrap
 subject: null
 objective_status: uninitialized
 entrypoint: AGENTS.md
 
 principles:
+  - preserve_subject_repository_identity
   - minimal_seed
   - progressive_specialization
   - evidence_over_accumulation
@@ -14,6 +15,7 @@ principles:
 
 skills:
   active:
+    - skills/repository-initializer/SKILL.md
     - skills/bootstrap/SKILL.md
     - skills/harness-designer/SKILL.md
     - skills/harness-review/SKILL.md
