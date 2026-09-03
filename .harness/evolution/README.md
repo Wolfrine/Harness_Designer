@@ -24,6 +24,8 @@ A candidate should normally answer:
 - What regressions are plausible?
 - What would cause the change to be removed later?
 
+When repository-local trajectory evidence exists, reference relevant session ids/shards instead of copying whole session histories into the evolution note.
+
 ## Promotion guidance
 
 Promote a candidate when at least one of these is true and the change has clear future value:
@@ -44,7 +46,11 @@ The consolidator should preferably be a fresh agent/session. It should reconstru
 
 Sleep may consolidate, simplify, merge, revise or retire existing components as well as create new candidates. A successful sleep cycle may make the harness smaller.
 
-Use existing runtime/conversation/Git/evaluation evidence before adding dedicated trajectory logs.
+Use existing runtime/conversation/Git/evaluation evidence before adding dedicated trajectory logs. When the user has opted into the Harness Dashboard, repository-local trajectory evidence may already exist and should be reused rather than duplicated.
+
+## Dashboard visibility
+
+If the Harness Dashboard is enabled, evolution records can be surfaced there so the user can see what changed and why. The dashboard remains a view over this directory, the manifest, trajectory evidence and Git history; it is not the canonical evolution record.
 
 ## Review
 
