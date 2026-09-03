@@ -7,6 +7,8 @@ description: Decide when a discovery from real work deserves persistent harness 
 
 Use this skill when real work reveals a durable pattern, repeated friction, missing capability, important invariant or reusable procedure.
 
+For patterns that only become clear across multiple trajectories, or when several harness components may need to change together, prefer `skills/harness-sleep/SKILL.md` rather than continually patching the harness from the active session.
+
 ## First question
 
 **Will persisting this materially improve future work?**
@@ -39,8 +41,9 @@ Before adding something, check:
 3. **Existing coverage** — Is there already a rule, skill or tool that should be improved instead?
 4. **Placement** — Is this information, procedure, enforcement, evaluation or state?
 5. **Cost** — What context, maintenance or rigidity does it add?
-6. **Validation** — How would we know the change helped?
+6. **Validation** — How would we know the change improved actual outcomes?
 7. **Removal** — Under what condition should it be consolidated or retired?
+8. **Scope** — Is this a local improvement, or does it require cross-trajectory sleep consolidation?
 
 ## Candidate-first behavior
 
