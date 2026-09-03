@@ -1,11 +1,13 @@
 ---
 name: harness-review
-description: Review an evolved harness for duplication, stale assumptions, unnecessary complexity and misplaced primitives; consolidate or retire components while preserving useful capability.
+description: Review an evolved harness for duplication, stale assumptions, unnecessary complexity and misplaced primitives; consolidate or retire components while preserving useful capability. Can run standalone or as the structural-review phase of harness sleep.
 ---
 
 # Harness Review
 
-Use periodically, after substantial growth, after a model/tool change, or when the harness feels harder to understand than the work itself.
+Use periodically, after substantial growth, after a model/tool change, when the harness feels harder to understand than the work itself, or when invoked from `skills/harness-sleep/SKILL.md`.
+
+When used during sleep, review components in light of recent trajectories and actual outcomes rather than inspecting structure in isolation.
 
 ## Review questions
 
@@ -19,6 +21,7 @@ For each active component:
 6. Could it be shorter or loaded only when relevant?
 7. Does it encode an assumption about an older model, tool or workflow that no longer holds?
 8. What would break if it were removed?
+9. Do recent outcomes show that this component improves real work, or only that agents comply with it?
 
 ## Actions
 
@@ -41,6 +44,7 @@ Check these first:
 - repeated context loaded on every session;
 - stale tool/authentication procedures;
 - contradictory instructions;
+- special-case patches that may collapse into a broader invariant;
 - loops without clear stopping conditions or useful verification;
 - evaluations that reward proxy behavior rather than the real objective.
 
