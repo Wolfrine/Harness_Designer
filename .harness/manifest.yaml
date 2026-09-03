@@ -1,4 +1,4 @@
-version: 0.3.0
+version: 0.4.0
 stage: bootstrap
 subject: null
 objective_status: uninitialized
@@ -12,6 +12,8 @@ principles:
   - smallest_adequate_primitive
   - outcome_over_instruction_compliance
   - online_and_offline_evolution
+  - trajectory_evidence_when_useful
+  - optional_human_observability
   - portable_by_default
   - human_legible
 
@@ -22,6 +24,7 @@ skills:
     - skills/harness-designer/SKILL.md
     - skills/harness-review/SKILL.md
     - skills/harness-sleep/SKILL.md
+    - skills/harness-dashboard/SKILL.md
   generated: []
 
 hooks:
@@ -38,6 +41,15 @@ tools: []
 agents: []
 loops: []
 state: []
+
+trajectory:
+  mode: on_demand
+  location: .harness/trajectory/
+  sessions: null
+
+observability:
+  dashboard: undecided
+  dashboard_path: null
 
 evolution:
   mode: candidate_first
