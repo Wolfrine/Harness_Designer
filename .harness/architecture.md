@@ -41,8 +41,15 @@ See `skills/repository-initializer/SKILL.md` for the operational procedure.
 6. Separate evidence from policy: an observation can justify a candidate without immediately becoming a permanent rule.
 7. Design every generated component so it can later be consolidated or retired.
 8. Preserve repository identity while evolving harness structure.
+9. Judge improvement by objective outcomes, not instruction compliance alone.
 
-## Evolution cycle
+## Evolution architecture
+
+Harness Designer supports two complementary evolutionary modes.
+
+### Online evolution
+
+Use during active work when a high-confidence durable improvement is obvious.
 
 ```text
 observe
@@ -53,16 +60,54 @@ classify
   ↓
 check for duplication
   ↓
-create candidate
+create candidate when needed
   ↓
 try / evaluate
   ↓
 promote / revise / reject
-  ↓
-monitor
-  ↓
-consolidate / retire
 ```
+
+### Sleep evolution
+
+Use offline when useful signal emerges across multiple trajectories or when the harness itself needs consolidation.
+
+```text
+AWAKE
+  ↓
+agents perform real work
+  ↓
+trajectories / outcomes / corrections accumulate
+  ↓
+enough adaptation pressure
+  ↓
+SLEEP
+  ↓
+fresh agent reconstructs objective + harness
+  ↓
+review several recent trajectories
+  ↓
+judge meaningful outcomes
+  ↓
+abstract cross-run patterns
+  ↓
+consolidate / simplify / retire
+  ↓
+generate candidate harness mutations
+  ↓
+evaluate / regression-check
+  ↓
+promote useful changes
+  ↓
+WAKE with evolved harness
+```
+
+The sleep consolidator should preferably be a fresh agent or session rather than the worker that produced the recent trajectories. This reduces attachment to local reasoning paths and creates a clean separation between performing work and improving the system that performs it.
+
+Sleep should consume evidence already available from conversations, runtime trajectories, Git history, evaluations, user feedback and evolution notes before inventing new logging infrastructure.
+
+During sleep, candidate harness changes should be isolated from unrelated real-world subject actions when practical. The system may inspect, reason, simulate and test without granting experimental behavior unnecessary production authority.
+
+See `skills/harness-sleep/SKILL.md` for the operational procedure.
 
 ## Avoid
 
@@ -72,6 +117,8 @@ consolidate / retire
 - Domain assumptions in the seed.
 - Persisting every conversation detail.
 - Adding a new permanent rule after every isolated problem.
+- Continuous self-editing by the active agent when evidence should first accumulate across runs.
+- Mandatory trajectory bureaucracy when existing runtime evidence is sufficient.
 - Replacing an existing project's Git identity while installing the harness.
 - Forcing objective completion when the user has intentionally deferred context.
 
