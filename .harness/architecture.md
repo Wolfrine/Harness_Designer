@@ -28,6 +28,7 @@ See `skills/repository-initializer/SKILL.md` for the operational procedure.
 | Distinct expert role | Agent |
 | Repeated process with state/stopping logic | Loop |
 | Mutable present condition | State |
+| Durable record of what agents actually did/outcomes | Trajectory / evidence |
 | Important choice and rationale | Decision record |
 | One-off detail | Conversation only |
 
@@ -39,9 +40,45 @@ See `skills/repository-initializer/SKILL.md` for the operational procedure.
 4. Prefer progressive disclosure: keep entry instructions small and load detail only when relevant.
 5. Separate current truth from reusable procedure.
 6. Separate evidence from policy: an observation can justify a candidate without immediately becoming a permanent rule.
-7. Design every generated component so it can later be consolidated or retired.
-8. Preserve repository identity while evolving harness structure.
-9. Judge improvement by objective outcomes, not instruction compliance alone.
+7. Separate historical trajectory from current state: what happened before is evidence, not automatically current truth.
+8. Design every generated component so it can later be consolidated or retired.
+9. Preserve repository identity while evolving harness structure.
+10. Judge improvement by objective outcomes, not instruction compliance alone.
+
+## Trajectory / evidence layer
+
+Trajectory evidence is the historical record of what agents actually attempted and what happened. It becomes useful when a project needs cross-session continuity, parallel-agent visibility, durable history beyond runtime transcript retention, evidence-backed sleep consolidation or a user-facing Harness Dashboard.
+
+When repository-local persistence is justified, prefer independent session shards such as:
+
+```text
+.harness/trajectory/sessions/<date>-<session-id>.json
+```
+
+One shard per session/agent reduces write conflicts during parallel work.
+
+Prefer mechanical capture for timestamps, tools, files, branches, skills and similar observable facts. Keep model-written interpretation — summaries, outcomes, open threads and harness evidence — distinct and preserve it across mechanical rewrites.
+
+Do not require local trajectory logging if the runtime already provides sufficient durable searchable evidence.
+
+See `.harness/trajectory/README.md`.
+
+## Optional Harness Dashboard
+
+During bootstrap the user is asked once whether they want a local Harness Dashboard.
+
+If enabled, `skills/harness-dashboard/SKILL.md` uses `templates/dashboard/DASHBOARD_SPEC.md` as a minimal generation contract and the LLM creates a subject-specific dashboard rather than installing a rigid universal UI.
+
+The dashboard may visualize:
+
+- sessions and activity over time;
+- open continuation points;
+- parallel/forked work when relevant;
+- tools, skills, sub-agents and files used;
+- harness changes and candidate evolution;
+- review and sleep consolidation history.
+
+The dashboard is a view over canonical evidence, not the source of truth itself.
 
 ## Evolution architecture
 
@@ -103,7 +140,7 @@ WAKE with evolved harness
 
 The sleep consolidator should preferably be a fresh agent or session rather than the worker that produced the recent trajectories. This reduces attachment to local reasoning paths and creates a clean separation between performing work and improving the system that performs it.
 
-Sleep should consume evidence already available from conversations, runtime trajectories, Git history, evaluations, user feedback and evolution notes before inventing new logging infrastructure.
+Sleep should consume evidence already available from conversations, runtime trajectories, `.harness/trajectory/` when enabled, Git history, evaluations, user feedback and evolution notes before inventing new logging infrastructure.
 
 During sleep, candidate harness changes should be isolated from unrelated real-world subject actions when practical. The system may inspect, reason, simulate and test without granting experimental behavior unnecessary production authority.
 
@@ -119,6 +156,8 @@ See `skills/harness-sleep/SKILL.md` for the operational procedure.
 - Adding a new permanent rule after every isolated problem.
 - Continuous self-editing by the active agent when evidence should first accumulate across runs.
 - Mandatory trajectory bureaucracy when existing runtime evidence is sufficient.
+- Treating a dashboard as canonical state.
+- Creating a dashboard after the user explicitly declined it.
 - Replacing an existing project's Git identity while installing the harness.
 - Forcing objective completion when the user has intentionally deferred context.
 
