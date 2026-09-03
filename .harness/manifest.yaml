@@ -1,4 +1,4 @@
-version: 0.2.0
+version: 0.3.0
 stage: bootstrap
 subject: null
 objective_status: uninitialized
@@ -10,6 +10,8 @@ principles:
   - progressive_specialization
   - evidence_over_accumulation
   - smallest_adequate_primitive
+  - outcome_over_instruction_compliance
+  - online_and_offline_evolution
   - portable_by_default
   - human_legible
 
@@ -19,6 +21,7 @@ skills:
     - skills/bootstrap/SKILL.md
     - skills/harness-designer/SKILL.md
     - skills/harness-review/SKILL.md
+    - skills/harness-sleep/SKILL.md
   generated: []
 
 hooks:
@@ -38,5 +41,8 @@ state: []
 
 evolution:
   mode: candidate_first
+  online: enabled
+  sleep: available
   location: .harness/evolution/
   last_review: null
+  last_sleep: null
