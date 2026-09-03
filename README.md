@@ -4,6 +4,8 @@ A minimal, domain-agnostic seed harness that progressively learns an objective a
 
 The user should not need to know how to design an agent harness. They describe what they are trying to accomplish; the seed discovers the subject, starts useful work, observes recurring patterns and progressively places durable improvements into the right harness primitive.
 
+![Harness Designer overview](assets/harness-designer-overview.webp)
+
 ## Core principle
 
 **Harness Designer is a shaping source, not the finished project repository.**
