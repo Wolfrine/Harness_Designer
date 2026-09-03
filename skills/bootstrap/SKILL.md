@@ -35,13 +35,42 @@ Useful dimensions include:
 
 Do not mechanically ask every dimension. If the user's first explanation already answers several, move forward.
 
-### 3. Explore the problem, not just stated requirements
+### 3. Offer the Harness Dashboard once
+
+During initial bootstrap, resolve the dashboard preference explicitly unless it is already recorded in `.harness/manifest.yaml`.
+
+Ask the user a concise question such as:
+
+> Would you like a local Harness Dashboard that shows what agent sessions have happened, what remains open, and how the harness is evolving over time?
+
+Make clear that:
+
+- it is optional;
+- it is local by default;
+- it can be enabled later;
+- if enabled, the LLM generates a dashboard suited to this subject from Harness Designer's basic structure rather than installing a rigid universal UI.
+
+If the user says **yes**:
+
+- set `observability.dashboard: enabled`;
+- use `skills/harness-dashboard/SKILL.md` after the initial subject model is sufficiently understood;
+- enable repository-local trajectory persistence only to the extent needed by the subject/runtime, or adapt an existing durable runtime trajectory source.
+
+If the user says **no**:
+
+- set `observability.dashboard: disabled`;
+- leave `dashboard_path: null`;
+- do not ask again on later sessions unless the user reopens the choice.
+
+Dashboard preference is a product/observability choice, not a request for the user to design harness primitives.
+
+### 4. Explore the problem, not just stated requirements
 
 The user may not yet know all relevant factors. When useful, ask questions that reveal dependencies, actors, assumptions, failure modes, opportunities, relationships and missing information.
 
 Avoid turning discovery into an endless interview. The objective can continue becoming clearer through real work.
 
-### 4. Write the initial subject model
+### 5. Write the initial subject model
 
 Update `.harness/objective.md` with what is actually known. Distinguish known constraints from open questions.
 
@@ -50,13 +79,14 @@ Update `.harness/manifest.yaml`:
 - set a concise `subject` when known;
 - keep `objective_status` in bootstrap/uninitialized while material objective context is still missing;
 - set `objective_status` to `working` when enough is known to proceed;
-- change `stage` from `bootstrap` to `active` once the first useful subject-specific harness exists.
+- change `stage` from `bootstrap` to `active` once the first useful subject-specific harness exists;
+- preserve the resolved dashboard preference.
 
 Do not invent objective details merely to complete initialization.
 
 Create additional subject/context documents only when they already provide practical value.
 
-### 5. Create the minimum viable harness
+### 6. Create the minimum viable harness
 
 Use `skills/harness-designer/SKILL.md` to add only primitives clearly justified by the objective or immediate work.
 
@@ -66,11 +96,14 @@ Typical first-run output may be no more than:
 - one or two domain instructions;
 - one useful skill;
 - known tools/connectors;
-- a small amount of state.
+- a small amount of state;
+- an optional generated Harness Dashboard if the user opted in.
 
 It is acceptable for the first harness to remain primitive.
 
-### 6. Start real work
+If the dashboard is enabled, use `skills/harness-dashboard/SKILL.md` to create it from the subject context and the template contract. Do not delay useful subject work to perfect the dashboard.
+
+### 7. Start real work
 
 Do not end after configuration unless the user asked only for setup. Perform or advance the actual objective as soon as practical.
 
@@ -82,5 +115,6 @@ Bootstrap is successful when a new session can answer:
 2. What matters most right now?
 3. What should I load or use for the current request?
 4. What remains unknown?
+5. Is the optional Harness Dashboard enabled, disabled or intentionally still undecided?
 
 It does not need a complete model of the subject.
