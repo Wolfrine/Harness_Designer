@@ -63,12 +63,37 @@ After repository identity is correct:
 
 1. A new agent session reads `AGENTS.md`.
 2. The bootstrap skill asks a few adaptive, high-information questions about the objective and current situation.
-3. The agent records only the minimum useful subject model and creates the smallest harness needed to begin.
-4. Real work starts.
-5. As work continues, durable patterns can become knowledge, instructions, skills, hooks, evaluations, tools, specialist agents, loops or state.
-6. Harness changes are reviewed for value, duplication and staleness instead of accumulating forever.
+3. Bootstrap asks once whether the user wants the optional **Harness Dashboard**.
+4. The agent records only the minimum useful subject model and creates the smallest harness needed to begin.
+5. If the dashboard is enabled, the LLM generates a subject-specific local dashboard from Harness Designer's basic dashboard contract.
+6. Real work starts.
+7. As work continues, durable patterns can become knowledge, instructions, skills, hooks, evaluations, tools, specialist agents, loops, state or trajectory/evidence.
+8. Harness changes are reviewed for value, duplication and staleness instead of accumulating forever.
 
 The subject can be known while the objective remains in bootstrap. Do not invent objective details merely to complete setup.
+
+## Optional Harness Dashboard
+
+Harness Designer can create a local dashboard that makes the agentic workspace understandable without reading every chat or raw transcript.
+
+If the user opts in, the LLM generates a dashboard suited to the subject using `templates/dashboard/DASHBOARD_SPEC.md` rather than copying a rigid finished UI.
+
+Depending on the subject, it can show:
+
+- agent sessions and activity over time;
+- open continuation points;
+- parallel/forked work;
+- tools, skills, files and sub-agents involved;
+- harness changes and evolution candidates;
+- review and sleep-consolidation history.
+
+When durable repository-local history is useful, Harness Designer can maintain one trajectory/evidence shard per session under `.harness/trajectory/sessions/`. One shard per session keeps parallel agents from contending over a single log file.
+
+Mechanical evidence such as timestamps, tool use and files touched is kept distinct from model-written interpretation such as summaries, outcomes and open threads. The dashboard is a view over this evidence, not the canonical source of project state.
+
+The dashboard is optional and can be enabled later if declined during bootstrap.
+
+See `skills/harness-dashboard/SKILL.md` and `.harness/trajectory/README.md`.
 
 ## Two evolution modes
 
@@ -90,7 +115,7 @@ It can then:
 - create candidate instructions, skills, tools, hooks, agents, loops or evaluations;
 - regression-test candidate mutations before promotion.
 
-Sleep is evidence-triggered rather than a mandatory fixed schedule. Existing conversations, runtime trajectories, Git history, evaluations and user feedback should be used before creating dedicated logging machinery.
+Sleep is evidence-triggered rather than a mandatory fixed schedule. Existing conversations, runtime trajectories, optional `.harness/trajectory/` evidence, Git history, evaluations and user feedback should be used before creating additional logging machinery.
 
 During candidate experimentation, unrelated real-world subject actions should be isolated when practical. Experimental self-modification should not automatically inherit production authority.
 
@@ -101,20 +126,24 @@ See `skills/harness-sleep/SKILL.md`.
 ```text
 AGENTS.md                  Agent entrypoint and minimal operating contract
 .harness/
-  manifest.yaml            Current harness identity and maturity
+  manifest.yaml            Current harness identity, maturity and observability state
   objective.md             Evolving statement of objective and constraints
   architecture.md          Placement, evolution and repository-identity rules
   evolution/README.md      Candidate → active → revised/retired lifecycle
+  trajectory/README.md     Optional durable agent trajectory/evidence contract
 skills/
   repository-initializer/  Safely shapes the actual subject repository
-  bootstrap/               First-run subject discovery
+  bootstrap/               First-run subject discovery + dashboard choice
   harness-designer/        Converts durable online patterns into harness structure
   harness-review/          Consolidates and prunes harness structure
   harness-sleep/           Offline trajectory review and harness consolidation
+  harness-dashboard/       Generates optional subject-specific observability dashboard
 hooks/
   session-start.md         Portable start-of-session lifecycle contract
-  session-end.md           Portable end-of-session lifecycle contract
-templates/                 Lightweight templates for new primitives
+  session-end.md           Portable end-of-session + optional trajectory/dashboard contract
+templates/
+  dashboard/               Minimal dashboard generation contract + session-shard example
+  ...                      Other lightweight primitive templates
 ```
 
 ## Harness primitives
@@ -130,6 +159,7 @@ templates/                 Lightweight templates for new primitives
 | Independent specialist reasoning | Agent |
 | Repeated or autonomous process | Loop |
 | Mutable current position | State |
+| Durable evidence of what agents did/outcomes | Trajectory / evidence |
 | One-off context | Keep in the conversation |
 
 The smallest adequate primitive wins.
