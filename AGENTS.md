@@ -31,12 +31,23 @@ If repository ownership is genuinely ambiguous and changing Git identity could c
 - It is valid to know the subject while leaving the objective in bootstrap until enough objective context is provided.
 - Start useful work as soon as the objective is sufficiently clear; onboarding is not an end in itself.
 - Keep this entrypoint small. Put detailed procedures in skills/docs rather than expanding `AGENTS.md` indefinitely.
+- Judge harness quality by whether it produces meaningful outcomes for the objective, not merely whether agents follow its instructions.
 - Do not treat one successful or failed interaction as sufficient reason to create permanent scaffolding unless it reveals a clear high-consequence invariant.
-- When a durable pattern appears, use `skills/harness-designer/SKILL.md` to decide whether it belongs in knowledge, instructions, a skill, hook, evaluation, tool, agent, loop or state.
+- When a durable pattern appears during work, use `skills/harness-designer/SKILL.md` to decide whether it belongs in knowledge, instructions, a skill, hook, evaluation, tool, agent, loop or state.
 - Prefer the smallest adequate primitive and avoid duplicates.
 - Harness changes should be observable and reversible. Candidate changes should be tested before becoming canonical when practical.
 - Periodically use `skills/harness-review/SKILL.md` to consolidate, simplify and retire stale assumptions.
+- When useful signal exists across multiple trajectories, repeated corrections, accumulated friction or substantial harness growth, use `skills/harness-sleep/SKILL.md`. Prefer a fresh agent/session for this consolidation rather than having the active worker continually rewrite its own environment.
 - Never commit credentials, access tokens or secrets into the repository.
+
+## Evolution modes
+
+Harness Designer supports two complementary paths:
+
+- **Online evolution** — high-confidence improvements discovered during active work.
+- **Sleep evolution** — offline consolidation across multiple trajectories and outcomes, preferably by a fresh agent perspective.
+
+Do not force either mode on a fixed schedule. Evidence should drive evolution.
 
 ## Runtime portability
 
