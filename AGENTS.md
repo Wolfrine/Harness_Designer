@@ -20,7 +20,7 @@ If repository ownership is genuinely ambiguous and changing Git identity could c
 
 1. Read `.harness/manifest.yaml` and `.harness/objective.md`.
 2. Follow `hooks/session-start.md`.
-3. If `stage: bootstrap`, use `skills/bootstrap/SKILL.md` before inventing domain structure.
+3. If `stage: bootstrap`, use `skills/bootstrap/SKILL.md` before inventing domain structure. Bootstrap also resolves the user's optional Harness Dashboard preference once.
 4. Load only the skills and knowledge relevant to the current request. Do not dump the entire harness into context.
 
 ## Operating rules
@@ -33,12 +33,14 @@ If repository ownership is genuinely ambiguous and changing Git identity could c
 - Keep this entrypoint small. Put detailed procedures in skills/docs rather than expanding `AGENTS.md` indefinitely.
 - Judge harness quality by whether it produces meaningful outcomes for the objective, not merely whether agents follow its instructions.
 - Do not treat one successful or failed interaction as sufficient reason to create permanent scaffolding unless it reveals a clear high-consequence invariant.
-- When a durable pattern appears during work, use `skills/harness-designer/SKILL.md` to decide whether it belongs in knowledge, instructions, a skill, hook, evaluation, tool, agent, loop or state.
+- When a durable pattern appears during work, use `skills/harness-designer/SKILL.md` to decide whether it belongs in knowledge, instructions, a skill, hook, evaluation, tool, agent, loop, state or trajectory/evidence.
 - Prefer the smallest adequate primitive and avoid duplicates.
+- Use repository-local trajectory evidence only when the subject benefits from durable agent history, parallel-session visibility, dashboard observability, evaluation or sleep consolidation. Existing durable runtime trajectories may be sufficient.
+- If `observability.dashboard: enabled`, use `skills/harness-dashboard/SKILL.md` and its generated runtime adapter/lifecycle behavior to keep the subject-specific dashboard useful. The dashboard is a view, not canonical state.
 - Harness changes should be observable and reversible. Candidate changes should be tested before becoming canonical when practical.
 - Periodically use `skills/harness-review/SKILL.md` to consolidate, simplify and retire stale assumptions.
 - When useful signal exists across multiple trajectories, repeated corrections, accumulated friction or substantial harness growth, use `skills/harness-sleep/SKILL.md`. Prefer a fresh agent/session for this consolidation rather than having the active worker continually rewrite its own environment.
-- Never commit credentials, access tokens or secrets into the repository.
+- Never commit credentials, access tokens or secrets into the repository or trajectory evidence.
 
 ## Evolution modes
 
@@ -49,10 +51,16 @@ Harness Designer supports two complementary paths:
 
 Do not force either mode on a fixed schedule. Evidence should drive evolution.
 
+## Observability
+
+Harness Designer can optionally generate a local subject-specific dashboard showing agent sessions, open threads, activity and harness evolution. The user opts in during bootstrap or can enable it later.
+
+The LLM generates the dashboard from Harness Designer's minimal dashboard contract and the subject's actual needs rather than copying a universal finished UI.
+
 ## Runtime portability
 
 Files under `hooks/` define lifecycle **contracts**. If the current agent runtime supports native hooks, they may be implemented through an adapter. Otherwise follow the contracts directly at the appropriate lifecycle point.
 
 ## End of session
 
-Follow `hooks/session-end.md`. Persist only information that will materially improve future work.
+Follow `hooks/session-end.md`. Persist only information that will materially improve future work or support observability the user explicitly enabled.
