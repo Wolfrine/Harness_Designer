@@ -25,7 +25,8 @@ The first question is not whether prior agents followed instructions. It is:
 
 Use evidence already available before creating new logging machinery:
 
-- recent agent/session trajectories or conversations;
+- `.harness/trajectory/sessions/` when the subject has enabled repository-local trajectory evidence;
+- durable runtime-native trajectories or conversations;
 - user corrections and feedback;
 - Git commits, diffs and issue history;
 - evaluation results;
@@ -33,7 +34,9 @@ Use evidence already available before creating new logging machinery:
 - observable task outcomes;
 - existing harness structure.
 
-Create explicit experience logs only when the runtime otherwise cannot provide enough evidence for useful consolidation.
+If an optional Harness Dashboard is enabled, treat its underlying trajectory/evolution evidence as input; do not reason from the rendered dashboard alone when canonical sources are available.
+
+Create explicit experience logs only when the runtime otherwise cannot provide enough evidence for useful consolidation or the user has opted into observability that needs durable history.
 
 ## Sleep cycle
 
@@ -42,6 +45,7 @@ Create explicit experience logs only when the runtime otherwise cannot provide e
 - Read `.harness/manifest.yaml`, `.harness/objective.md` and `.harness/architecture.md`.
 - Understand the subject repository and what successful work means.
 - Inspect the active instructions, skills, hooks, evaluations, tools, agents, loops and state relevant to recent work.
+- Inspect trajectory/evidence configuration and dashboard state when present.
 
 Do this before interpreting prior trajectories so the consolidator has an independent model of the system.
 
@@ -57,6 +61,7 @@ For each meaningful trajectory ask:
 4. What failed or required correction?
 5. Was the cause task-specific, model-specific, tool-specific, context-specific, or harness-level?
 6. Did the harness help, interfere, or remain irrelevant?
+7. Did the session create harness evidence or modify harness components?
 
 ### 3. Abstract across trajectories
 
@@ -71,7 +76,8 @@ Look for cross-run patterns:
 - skills that should merge or split;
 - procedures that can be simplified;
 - special-case patches that reveal a broader invariant;
-- components that no longer earn their context or maintenance cost.
+- components that no longer earn their context or maintenance cost;
+- repeated open threads or forks that indicate unresolved systemic friction.
 
 Do not convert every observation into a harness change.
 
@@ -97,6 +103,8 @@ A candidate should state:
 - how it will be evaluated;
 - retirement condition.
 
+Where repository-local trajectory shards exist, reference the relevant session ids rather than duplicating entire histories into the candidate note.
+
 ### 6. Validate
 
 Before making a material mutation canonical:
@@ -114,6 +122,10 @@ Prefer observable evidence over self-assessed improvement.
 Promote only changes that have sufficient evidence and acceptable regression risk.
 
 Update `.harness/manifest.yaml` and relevant evolution notes after material consolidation.
+
+If repository-local trajectory shards were reviewed, optionally add lightweight review metadata such as `sleep.reviewedAt` and `sleep.cycle` without rewriting or discarding the original evidence.
+
+If the Harness Dashboard is enabled, regenerate or refresh it so the user can see the completed sleep cycle and resulting harness changes.
 
 Future agents should then operate using the evolved harness without needing the full sleep analysis in their normal context.
 
@@ -135,4 +147,4 @@ Use **sleep evolution** when the useful signal emerges across multiple trajector
 
 The goal is not to make the harness larger after every sleep cycle.
 
-A successful sleep cycle leaves future agents with a harness that is more coherent, more effective, and usually no more complex than necessary.
+A successful sleep cycle leaves future agents with a harness that is more coherent, more effective, and usually no more complex than necessary — while any enabled dashboard makes that evolution understandable to the user.
