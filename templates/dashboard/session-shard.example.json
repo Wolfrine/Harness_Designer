@@ -1,0 +1,27 @@
+{
+  "sessionId": "<runtime-session-id>",
+  "sessionIdShort": "<short-id>",
+  "title": "<session title or opening direction>",
+  "start": "<ISO-8601 timestamp>",
+  "end": null,
+  "taskType": "<subject-specific work type>",
+  "branch": null,
+  "prompts": [],
+  "promptCount": 0,
+  "tools": {},
+  "connectors": {},
+  "filesTouched": [],
+  "subAgents": [],
+  "skills": [],
+  "summary": null,
+  "openThread": null,
+  "outcome": null,
+  "userCorrections": [],
+  "harnessEvidence": [],
+  "harnessChanges": [],
+  "source": "<hook|runtime|transcript|manual>",
+  "sleep": {
+    "reviewedAt": null,
+    "cycle": null
+  }
+}
