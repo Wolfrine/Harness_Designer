@@ -21,11 +21,15 @@ subject-specific minimum harness
       ↓
 real work
       ↓
-observe friction / repetition / discoveries
+online discoveries + accumulated trajectories
       ↓
-classify → test → promote / revise / retire
+classify / candidate / test
       ↓
-more specialized working environment
+periodic sleep consolidation
+      ↓
+review outcomes → abstract → prune → improve → validate
+      ↓
+more coherent specialized working environment
 ```
 
 ## Initialization modes
@@ -64,6 +68,32 @@ After repository identity is correct:
 
 The subject can be known while the objective remains in bootstrap. Do not invent objective details merely to complete setup.
 
+## Two evolution modes
+
+### Online evolution
+
+During active work, clear high-confidence discoveries can improve the harness directly through candidate-first design. This is suitable for explicit durable user instructions, obvious missing procedures, repeated known needs and high-consequence invariants.
+
+### Sleep evolution
+
+Some improvements only become visible across multiple agent trajectories. Harness Designer therefore includes an offline consolidation mechanism inspired by the separation between active work and biological sleep.
+
+A sleep cycle preferably starts with a **fresh agent/session** that did not produce the recent work. It independently reconstructs the objective and current harness, then reviews several recent trajectories and asks whether the harness caused agents to produce meaningful outcomes.
+
+It can then:
+
+- identify recurring failure or success patterns;
+- consolidate repeated patches into better abstractions;
+- simplify, merge or retire stale harness components;
+- create candidate instructions, skills, tools, hooks, agents, loops or evaluations;
+- regression-test candidate mutations before promotion.
+
+Sleep is evidence-triggered rather than a mandatory fixed schedule. Existing conversations, runtime trajectories, Git history, evaluations and user feedback should be used before creating dedicated logging machinery.
+
+During candidate experimentation, unrelated real-world subject actions should be isolated when practical. Experimental self-modification should not automatically inherit production authority.
+
+See `skills/harness-sleep/SKILL.md`.
+
 ## Repository structure
 
 ```text
@@ -71,13 +101,14 @@ AGENTS.md                  Agent entrypoint and minimal operating contract
 .harness/
   manifest.yaml            Current harness identity and maturity
   objective.md             Evolving statement of objective and constraints
-  architecture.md          Placement and repository-identity rules
-  evolution/README.md      Candidate → active → retired lifecycle
+  architecture.md          Placement, evolution and repository-identity rules
+  evolution/README.md      Candidate → active → revised/retired lifecycle
 skills/
   repository-initializer/  Safely shapes the actual subject repository
   bootstrap/               First-run subject discovery
-  harness-designer/        Converts durable patterns into harness structure
-  harness-review/          Consolidates and prunes the harness
+  harness-designer/        Converts durable online patterns into harness structure
+  harness-review/          Consolidates and prunes harness structure
+  harness-sleep/           Offline trajectory review and harness consolidation
 hooks/
   session-start.md         Portable start-of-session lifecycle contract
   session-end.md           Portable end-of-session lifecycle contract
@@ -104,6 +135,8 @@ The smallest adequate primitive wins.
 ## Philosophy
 
 The seed should stay small. Do not preload dozens of generic skills or rules. Specialization should be earned through the objective and actual work.
+
+Harness quality is judged by **meaningful outcomes**, not merely by whether agents followed instructions.
 
 Lifecycle hooks are contracts rather than platform-specific configuration. Adapters can map them into Codex, Claude Code, Cursor or another runtime when native hook behavior is useful.
 
