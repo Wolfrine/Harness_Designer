@@ -28,6 +28,7 @@ If not, leave it in the conversation.
 | Distinct specialist perspective/context | Agent |
 | Repeated process with recurrence/state | Loop |
 | Mutable current position | State |
+| Durable record of agent work/outcomes | Trajectory / evidence |
 | Important historical choice | Decision record |
 
 When two primitives could work, choose the simpler one unless the stronger mechanism solves a real failure mode.
@@ -39,7 +40,7 @@ Before adding something, check:
 1. **Evidence** — What happened that justifies it?
 2. **Recurrence** — Is this likely to matter again?
 3. **Existing coverage** — Is there already a rule, skill or tool that should be improved instead?
-4. **Placement** — Is this information, procedure, enforcement, evaluation or state?
+4. **Placement** — Is this information, procedure, enforcement, evaluation, state or historical trajectory evidence?
 5. **Cost** — What context, maintenance or rigidity does it add?
 6. **Validation** — How would we know the change improved actual outcomes?
 7. **Removal** — Under what condition should it be consolidated or retired?
@@ -86,8 +87,21 @@ Create specialist agents only when separate context, permissions, expertise or p
 
 Specify trigger, state, stopping condition, verifier and escalation behavior. Avoid endless autonomous cycles without a clear oracle or budget.
 
+### Trajectory / evidence
+
+Use trajectory persistence when historical agent behavior itself provides durable value: parallel-session visibility, continuation, transcript retention, evaluation, dashboard observability or sleep consolidation.
+
+Prefer one shard per independent session/agent when repository-local writes may happen concurrently. Separate mechanically observed fields from model-written interpretation and preserve interpretation across rebuilds.
+
+Do not create trajectory logs merely because the primitive exists. See `.harness/trajectory/README.md`.
+
+### Dashboard
+
+A dashboard is an optional human observability surface, not a new source-of-truth primitive. If the user opted in, use `skills/harness-dashboard/SKILL.md` and generate it from the subject's existing evidence.
+
 ## After implementation
 
 - Update `.harness/manifest.yaml` if the active structure changed.
 - Keep detailed rationale in `.harness/evolution/` when the decision is non-obvious or likely to need later review.
+- If trajectory evidence is enabled, record enough harness-change evidence for future sleep/dashboard use without duplicating canonical state.
 - Do not add multiple overlapping primitives for the same problem.
