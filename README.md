@@ -95,6 +95,20 @@ The dashboard is optional and can be enabled later if declined during bootstrap.
 
 See `skills/harness-dashboard/SKILL.md` and `.harness/trajectory/README.md`.
 
+
+## Visual design capability
+
+When a subject includes a user-facing UI, site, app, dashboard or other visually judged surface, Harness Designer can install/use `skills/visual-design-director/SKILL.md`.
+
+The skill deliberately separates:
+
+- art direction / perceptual quality;
+- implementation / usability / technical QA.
+
+It requires actual visual references and candidate renders for serious design acceptance, routes research-heavy work toward Work and implementation/rendering toward Codex, treats Figma/browser output as evidence rather than taste authority, and re-derives a direction after repeated visual stagnation instead of polishing a weak local optimum.
+
+`evaluations/visual-design-director.md` contains regression cases for the workflow.
+
 ## Two evolution modes
 
 ### Online evolution
