@@ -1,4 +1,4 @@
-version: 0.5.0
+version: 0.4.0
 stage: bootstrap
 subject: null
 objective_status: uninitialized
@@ -25,7 +25,6 @@ skills:
     - skills/harness-review/SKILL.md
     - skills/harness-sleep/SKILL.md
     - skills/harness-dashboard/SKILL.md
-    - skills/visual-design-director/SKILL.md
   generated: []
 
 hooks:
@@ -37,8 +36,7 @@ hooks:
 knowledge: []
 instructions:
   - AGENTS.md
-evaluations:
-  - evaluations/visual-design-director.md
+evaluations: []
 tools: []
 agents: []
 loops: []
