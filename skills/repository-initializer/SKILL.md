@@ -58,7 +58,6 @@ Bring in only the seed components needed to begin:
 - `.harness/` foundation, including the empty trajectory/evidence contract;
 - core bootstrap/harness-design/review/sleep skills;
 - the optional dashboard-generation skill so bootstrap can honor the user's dashboard choice;
-- the visual-design-director skill and evaluation when the subject contains a user-facing UI, site, app, dashboard, or other visually judged surface;
 - repository initializer while initialization remains relevant;
 - lifecycle hook contracts;
 - lightweight primitive/dashboard templates that are actually useful.
