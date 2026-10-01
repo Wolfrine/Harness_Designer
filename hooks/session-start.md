@@ -22,10 +22,9 @@
 7. Inspect available repository context and tools before asking for missing information.
 8. Load only the skills, knowledge and state that materially help this request.
 9. If subject bootstrap is required, invoke `skills/bootstrap/SKILL.md`. Bootstrap resolves the optional Harness Dashboard preference when still undecided.
-10. If the request materially affects UI/UX visual quality, layout, styling, brand expression, motion, or screen composition, load `skills/visual-design-director/SKILL.md` before implementation. Keep art-direction judgment separate from implementation/QA judgment.
-11. If the request concerns improving the working environment itself, load `skills/harness-designer/SKILL.md`.
-12. If the request concerns the enabled dashboard/trajectory layer, load `skills/harness-dashboard/SKILL.md`.
-13. Surface blocking uncertainty to the user only when it cannot reasonably be resolved from available context or through safe progress.
+10. If the request concerns improving the working environment itself, load `skills/harness-designer/SKILL.md`.
+11. If the request concerns the enabled dashboard/trajectory layer, load `skills/harness-dashboard/SKILL.md`.
+12. Surface blocking uncertainty to the user only when it cannot reasonably be resolved from available context or through safe progress.
 
 ## Trajectory start behavior
 
@@ -49,7 +48,6 @@ The hook should leave the agent with:
 - a concise understanding of the current objective;
 - the likely work mode;
 - the relevant harness components to use;
-- a visual-direction route when visual quality materially matters;
 - important current state/constraints;
 - an initialized trajectory record when that capability is enabled and practical;
 - no unnecessary context payload.
